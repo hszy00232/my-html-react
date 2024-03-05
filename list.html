@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Multiple React components on a single HTML page</title>
+</head>
+<body>
+    <h2>Add Multiple React components on a single HTML page</h2>
+    <p>This page demonstrates using React with no build tooling to add multiple components to a single page.</p>
+    <p>React is loaded as a script tag.</p>
+    <p>
+      This is the first comment.
+      <!-- We will put our React component inside this div. -->
+      <div class="like-button-root" data-commentid="1"></div>
+    </p>
+
+    <p>
+      This is the second comment.
+      <!-- We will put our React component inside this div. -->
+      <div class="like-button-root" data-commentid="2"></div>
+    </p>
+
+    <p>
+      This is the third comment.
+      <!-- We will put our React component inside this div. -->
+      <div class="like-button-root" data-commentid="3"></div>
+    </p>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script>
+        function LikeButton(props) {
+            const [liked, setLiked] = React.useState(false);
+
+            if (liked) {
+                return 'You liked comment number ' + props.commentID;
+            }
+
+            return React.createElement(
+                'button',
+                { onClick: () => setLiked(true) },
+                'Like'
+            );
+        }
+        document.querySelectorAll('.like-button-root').forEach((rootNode) => {
+            const root = ReactDOM.createRoot(rootNode);
+            const commentID = parseInt(rootNode.getAttribute('data-commentid'), 10);
+            root.render(React.createElement(LikeButton, { commentID: commentID }));
+        });
+    </script>
+</body>
+</html>

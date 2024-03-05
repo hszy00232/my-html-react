@@ -1,0 +1,17 @@
+{
+  "name": "my-html-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch" : "npx babel --watch src --out-dir . --presets babel-preset-react-app/prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.23.9",
+    "babel-preset-react-app": "^10.0.1"
+  }
+}
